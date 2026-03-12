@@ -13,9 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Ingrese su fecha de nacimiento.";
     } else {
 
-        $sql = "select pe.*, p.*
+        $sql = "select p.*, hs.id_hse_movilidad
                     from periodolaboral pe 
                     inner join person p on pe.id_person = p.id_person
+                    left join hse_movilidad hs on p.id_person = hs.id_person
                     where ? between pe.periodo_fechainicio and pe.periodo_fechafin and pe.periodo_estado = 1
                     and p.person_dni = ? and p.person_birth = ?";
 
@@ -31,16 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$trab) {
             $error = "No se encontró un trabajador activo con esos datos.";
         } else {
-            // guardar en sesión (como array simple)
-            $_SESSION['mov_trabajador'] = [
-                'id' => $trab->id_person,
-                'dni' => $trab->person_dni,
-                'nombres' => $trab->person_name . " " . $trab->person_surname . " " . $trab->person_surname2,
-                'fecha_nacimiento' => $trab->person_birth,
-            ];
+            //identifico si este personal ya está registrado
+            if(!empty($trab->id_hse_movilidad)){
+                $error = "Ya existe un registro de " . $trab->person_name . " " . $trab->person_surname . " " . $trab->person_surname2;
+            }else{
+                // guardar en sesión (como array simple)
+                $_SESSION['mov_trabajador'] = [
+                    'id' => $trab->id_person,
+                    'dni' => $trab->person_dni,
+                    'nombres' => $trab->person_name . " " . $trab->person_surname . " " . $trab->person_surname2,
+                    'fecha_nacimiento' => $trab->person_birth,
+                ];
 
-            header("Location: form_vehiculo.php");
-            exit;
+                header("Location: "._SERVER_."form_vehiculo.php");
+                exit;
+            }
         }
     }
 }

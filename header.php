@@ -17,9 +17,8 @@ $styles = _SERVER_ . _STYLES_ADMIN_;
   <title>Registre su Movilidad</title>
 
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css"> -->
-    <link rel="icon" href="<?= _SERVER_ . _STYLES_ADMIN_;?>img/logo_intrag.jpg" type="image/x-icon"/>
+    <link rel="icon" href="<?= $styles ?>img/logo_intrag.jpg" type="image/x-icon"/>
 
-    <!-- Fonts and icons -->
     <script src="<?= _SERVER_ . _STYLES_ADMIN_;?>assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
         WebFont.load({
@@ -35,7 +34,6 @@ $styles = _SERVER_ . _STYLES_ADMIN_;
   <link rel="stylesheet" href="<?= $styles ?>assets/css/azzara.min.css">
   <link rel="stylesheet" href="<?= $styles ?>assets/css/select2.min.css">
   <link rel="stylesheet" href="<?= $styles ?>assets/css/egg_styles.css">
-  <link rel="stylesheet" href="<?= $styles ?>datatable/dataTables.bootstrap4.css">
 </head>
 <body>
     <div class="container mt-5">

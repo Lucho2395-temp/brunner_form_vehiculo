@@ -3,7 +3,7 @@
 include 'header.php';
 
 if (!isset($_SESSION['mov_trabajador'])) {
-    header("Location: index.php");
+    header("Location: "._SERVER_."index.php");
     exit;
 }
 $trab = $_SESSION['mov_trabajador'];
@@ -16,7 +16,7 @@ $trab = $_SESSION['mov_trabajador'];
         <b>DNI:</b> <?= htmlspecialchars($trab['dni']) ?>
       </div>
 
-      <form method="POST" action="guardar.php" enctype="multipart/form-data" autocomplete="off">
+      <form method="POST" action="models/guardar_vehiculo.php" enctype="multipart/form-data" autocomplete="off">
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Tipo de vehículo</label>
@@ -32,12 +32,12 @@ $trab = $_SESSION['mov_trabajador'];
 
           <div class="form-group col-md-12">
             <label>Marca</label>
-            <input type="text" name="marca" class="form-control" maxlength="20" required placeholder="Ejem. Honda">
+            <input type="text" name="marca" class="form-control" maxlength="30" required placeholder="Ejem. Honda">
           </div>
 
           <div class="form-group col-md-12">
             <label>Modelo</label>
-            <input type="text" name="modelo" class="form-control" maxlength="20" required placeholder="Ejem. CBF150ME">
+            <input type="text" name="modelo" class="form-control" maxlength="30" required placeholder="Ejem. CBF150ME">
           </div>
 
           <div class="form-group col-md-12">
@@ -56,22 +56,52 @@ $trab = $_SESSION['mov_trabajador'];
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label>¿SOAT vigente?</label>
-            <select name="soat_vigente" class="form-control" required>
-              <option value="">Seleccione</option>
-              <option value="1">Sí</option>
-              <option value="0">No</option>
-            </select>
-          </div>
+        <div class="form-group col-md-12">
+          <label>¿Licencia vigente?</label>
+          <select name="licencia_vigente" class="form-control" required>
+            <option value="">Seleccione</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label>¿SOAT vigente?</label>
+          <select name="soat_vigente" id="soat_vigente" class="form-control" onchange="select_soat()" required>
+            <option value="">Seleccione</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-12" id="div_fecha_vencimiento">
+          <label>Fecha de Vencimiento</label>
+          <input type="date" name="soat_fecha_nacimiento" id="soat_fecha_nacimiento" class="form-control">
         </div>
 
         <button class="btn btn-success btn-block">Guardar</button>
         <a href="index.php" class="btn btn-link btn-block">Volver</a>
       </form>
    
+
 <?php
 
 include 'footer.php';
 ?>
+  
+<script>
+
+  $(document).ready(function(){
+        select_soat();
+    });
+
+  function select_soat(){
+    $('#soat_fecha_nacimiento').val('')
+    let soat_vigente = $('#soat_vigente').val()
+    if(soat_vigente==1){
+      $('#div_fecha_vencimiento').show();
+    }else{
+      $('#div_fecha_vencimiento').hide();
+    }
+  }
+</script>

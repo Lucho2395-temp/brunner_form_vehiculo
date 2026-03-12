@@ -9,7 +9,7 @@ include 'header.php';
         <div class="card-body text-center">
           <h4 class="text-success">✅ Registro enviado correctamente</h4>
           <p>Gracias. Información registrada con fines preventivos.</p>
-          <a href="index.php" class="btn btn-primary">Registrar otro</a>
+          <a href="<?= _SERVER_ ?>index.php" class="btn btn-primary">Registrar otro</a>
         </div>
       </div>
     </div>
