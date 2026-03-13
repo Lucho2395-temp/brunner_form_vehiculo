@@ -3,10 +3,11 @@
 include 'header.php';
 
 if (!isset($_SESSION['mov_trabajador'])) {
-    header("Location: "._SERVER_."index.php");
+    header("Location: index.php");
     exit;
 }
 $trab = $_SESSION['mov_trabajador'];
+
 
 ?>
 

@@ -1,11 +1,10 @@
 <?php
+
 require_once __DIR__ . '/core/globals.php';
 require_once __DIR__ . '/core/Database.php';
-
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 $db = Database::getConnection();
-
 
 $styles = _SERVER_ . _STYLES_ADMIN_;
 ?>
