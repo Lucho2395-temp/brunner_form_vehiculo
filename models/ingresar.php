@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['error'] = "No se encontró un trabajador activo con esos datos.";
         echo $_SESSION['error'];
     header("Location: "._SERVER_."index.php");
-                //exit;
+                exit;
         } else {
             //identifico si este personal ya está registrado
             if(!empty($trab->id_hse_movilidad)){
