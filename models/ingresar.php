@@ -5,6 +5,9 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 $db = Database::getConnection();
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 $error = null;
 $date = date('Y-m-d');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!preg_match('/^\d{8}$/', $dni)) {
         $_SESSION['error'] = "DNI inválido (8 dígitos).";
-        echo $_SESSION['error'];
-    header("Location: "._SERVER_."index.php");
+        //echo $_SESSION['error'];
+        header("Location: "._SERVER_."index.php");
                 exit;
     } elseif (!$nac) {
         $_SESSION['error'] = "Ingrese su fecha de nacimiento.";
-        echo $_SESSION['error'];
-    header("Location: "._SERVER_."index.php");
+        //echo $_SESSION['error'];
+        header("Location: "._SERVER_."index.php");
                 exit;
     } else {
 
@@ -41,15 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$trab) {
             $_SESSION['error'] = "No se encontró un trabajador activo con esos datos.";
-        echo $_SESSION['error'];
-    header("Location: "._SERVER_."index.php");
-                exit;
+            //echo $_SESSION['error'];
+            header("Location: "._SERVER_."index.php");
+            exit;
         } else {
             //identifico si este personal ya está registrado
             if(!empty($trab->id_hse_movilidad)){
                 $_SESSION['error'] = "Ya existe un registro de " . $trab->person_name . " " . $trab->person_surname . " " . $trab->person_surname2;
-        echo $_SESSION['error'];
-    header("Location: "._SERVER_."index.php");
+                    //echo $_SESSION['error'];
+                header("Location: "._SERVER_."index.php");
                 exit;
             }else{
                 // guardar en sesión (como array simple)

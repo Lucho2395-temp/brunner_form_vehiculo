@@ -1,9 +1,10 @@
 <?php
 
 session_start();
-include 'header.php';
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);
+
+include 'header.php';
 ?>
     <div class="card-body">
         <div>   

@@ -1,13 +1,17 @@
 <?php
 
-include 'header.php';
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 if (!isset($_SESSION['mov_trabajador'])) {
     header("Location: index.php");
     exit;
 }
+
 $trab = $_SESSION['mov_trabajador'];
 
+include 'header.php';
 
 ?>
 
